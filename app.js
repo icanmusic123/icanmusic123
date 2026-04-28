@@ -35,7 +35,27 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.feature-card, .matching-text, .profile-card').forEach(el => {
-    el.classList.add('reveal');
-    observer.observe(el);
+// Mobile menu toggle
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.getElementById('navLinks');
+
+if (mobileMenu) {
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+}
+
+// Close menu when link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = mobileMenu.querySelector('i');
+        if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+        }
+    });
 });
